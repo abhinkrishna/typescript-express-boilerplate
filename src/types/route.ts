@@ -17,5 +17,6 @@ export type Route = {
     path: string,
     method: Method,
     access: Roles[],
+    middlewares?: [],
     controller: ((req: Request, res: Response, next: NextFunction) => Promise<void> | void)
 }

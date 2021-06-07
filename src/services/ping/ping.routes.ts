@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from "express";
 import { Method, Route } from "../../types/route";
-import UserController from "./ping.controller";
+import PingController from "./ping.controller";
 
 
 const routes: Route[] = [
@@ -9,7 +9,7 @@ const routes: Route[] = [
         method: Method.get,
         access: [],
         controller: async (req: Request, res: Response, next: NextFunction) => {
-            await new UserController(req, res, next).ping();
+            await new PingController(req, res, next).ping();
         }
     }
 ];

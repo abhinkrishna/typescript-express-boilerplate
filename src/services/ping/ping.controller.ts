@@ -8,7 +8,7 @@ class PingController extends Controller {
     } 
 
     public ping = async () => {
-        this.response200();
+        this.success200("pong");
     }
 
 }
