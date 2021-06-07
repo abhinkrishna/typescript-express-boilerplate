@@ -1,6 +1,6 @@
-# ecom-api
+# api-server
 
-API server for eCommerce application.
+Boilerplate code for API server application.
 
 Start server with tsc-watch
 
@@ -17,7 +17,7 @@ npm run nodemon
 Ping test
 
 ``` cmd
-http://localhost:8001/api/ping
+http://localhost:1001/api/ping
 ```
 
-ping [http://localhost:8001](http://localhost:8001/api/ping)
+ping [http://localhost:1001](http://localhost:1001/api/ping)
