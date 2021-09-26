@@ -27,7 +27,6 @@ initDatabase(dbConfig).then((connection) => {
     })
 
 }).catch((err) => {
-    console.log(err);
     console.log('* database connection failure *');
 })
 
