@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Method, Roles, Route } from "../../types/route";
 import UserController from "./users.controller";
+import { CreateUserDTO, ReadManyUsersDTO, UpdateUserByUserDTO, UpdateUserDTO, UpdateUserStatusDTO } from "./users.dto";
 
 
 const userRoute: Route[] = [
@@ -16,6 +17,7 @@ const userRoute: Route[] = [
         path: '/users/profile',
         method: Method.patch,
         access: [Roles.user],
+        validator: UpdateUserByUserDTO,
         controller: async (req: Request, res: Response, next: NextFunction) => {
             await new UserController(req, res, next).updateProfile();
         }
@@ -24,6 +26,7 @@ const userRoute: Route[] = [
         path: '/users',
         method: Method.post,
         access: [Roles.admin],
+        validator: CreateUserDTO,
         controller: async (req: Request, res: Response, next: NextFunction) => {
             await new UserController(req, res, next).create();
         }
@@ -40,6 +43,7 @@ const userRoute: Route[] = [
         path: '/users',
         method: Method.get,
         access: [Roles.admin],
+        validator: ReadManyUsersDTO,
         controller: async (req: Request, res: Response, next: NextFunction) => {
             await new UserController(req, res, next).readMany();
         }
@@ -48,6 +52,7 @@ const userRoute: Route[] = [
         path: '/users/:id',
         method: Method.patch,
         access: [Roles.admin],
+        validator: UpdateUserDTO,
         controller: async (req: Request, res: Response, next: NextFunction) => {
             await new UserController(req, res, next).update();
         }
@@ -56,6 +61,7 @@ const userRoute: Route[] = [
         path: '/users/status/:id',
         method: Method.patch,
         access: [Roles.admin],
+        validator: UpdateUserStatusDTO,
         controller: async (req: Request, res: Response, next: NextFunction) => {
             await new UserController(req, res, next).updateStatus();
         }
