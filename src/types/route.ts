@@ -17,6 +17,7 @@ export type Route = {
     path: string,
     method: Method,
     access: Roles[],
-    middlewares?: [],
+    validator?: any,
+    middlewares?: ((req: Request, res: Response, next: NextFunction) => any)[],
     controller: ((req: Request, res: Response, next: NextFunction) => Promise<void> | void)
 }
