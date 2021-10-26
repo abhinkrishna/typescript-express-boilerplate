@@ -22,7 +22,7 @@ class AuthController extends Controller {
         // Create user
         try {
             user = await new UserController(this.req, this.res, this.next).signupWithEmail(rawData);
-        } catch (error) {
+        } catch (error: any) {
             const message = { error: { message: error.detail } };
             throw new Exception400("User creation failed.", message);
         }
