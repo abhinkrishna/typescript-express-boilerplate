@@ -23,6 +23,12 @@ class User {
         type: "varchar",
         nullable: true,
     })
+    public country_code: string;
+
+    @Column({
+        type: "varchar",
+        nullable: true,
+    })
     public mobile: string;
 
     @Column({
