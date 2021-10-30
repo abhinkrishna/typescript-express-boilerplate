@@ -1,6 +1,7 @@
-import { getRepository } from "typeorm";
+import { getRepository, Not } from "typeorm";
 import { PaginationDefaults } from "../config/defaults";
 import Pagination from "../types/pagination";
+import { Exception400 } from "../utils/exception";
 
 class Model {
 
@@ -25,6 +26,24 @@ class Model {
         };
         return options;
     }
+
+    public uniqueCheckOnCreate = async (attribute: string[], object: any, message: string, repo?: any) => {
+        const filterObj: any = {};
+        for (const att of attribute) { filterObj[att] = object[att]; }
+        const result = (repo) ? await repo.findOne(filterObj) : await this.repository.findOne(filterObj);
+        if (result) throw new Exception400(message);
+        return;
+    }
+
+    public uniqueCheckOnUpdate = async (attribute: string[], id: number, object: any, message: string, repo?: any) => {
+        const filterObj: any = {};
+        for (const att of attribute) { filterObj[att] = object[att]; }
+        filterObj.id = Not(id);
+        const result = (repo) ? await repo.findOne(filterObj) : await this.repository.findOne(filterObj);
+        if (result) throw new Exception400(message);
+        return;
+    }
+
 
 }
 
